@@ -1,0 +1,28 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Waktu pembuatan: 17 Agu 2023 pada 10.39
+-- Versi server: 5.7.26
+-- Versi PHP: 5.6.40
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `rampcheck`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `id_user` int(11) NOT NULL,
+  `username` varchar(11) NOT NULL,
+  `password` text NOT NULL,
+  `nama` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
