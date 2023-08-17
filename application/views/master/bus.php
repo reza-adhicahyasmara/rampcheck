@@ -8,7 +8,7 @@
         <div class="card-header py-3">
             <div class="d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Data BUS Terdaftar</h6>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-circle"></i> Tambah</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
         </div>
         <div class="card-body">
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,36 +61,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Nomor Plat Kendaraan</label>
-                            <input type="text" class="form-control" name="nomor_plat_kendaraan" placeholder="Misal:E1234YAH">
+                <form id="form-add">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Nomor Plat Kendaraan</label>
+                                <input type="text" class="form-control" style="text-transform:uppercase" name="nomor_plat_kendaraan" placeholder="Misal:E1234YAH">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Nama PO</label>
+                                <input type="text" class="form-control" name="nama_po" placeholder="Misal:Sehati">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Jenis Angkutan</label>
+                                <select name="jenis_angkutan" class="form-control">
+                                    <option value="">--Pilih Jenis Angkutan--</option>
+                                    <option value="AKAP">AKAP</option>
+                                    <option value="AKDP">AKDP</option>
+                                    <option value="PARIWISATA">PARIWISATA</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Trayek</label>
+                                <input type="text" class="form-control" name="nama_po" placeholder="Misal:Kuningan-Jakarta">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Nama PO</label>
-                            <input type="text" class="form-control" name="nama_po" placeholder="Misal:Sehati">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Jenis Angkutan</label>
-                            <select name="jenis_angkutan" class="form-control">
-                                <option value="">--Pilih Jenis Angkutan--</option>
-                                <option value="AKAP">AKAP</option>
-                                <option value="AKDP">AKDP</option>
-                                <option value="PARIWISATA">PARIWISATA</option>
-                                <option value="Lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
             </div>
+            </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" id="btn-add" onclick="simpan()" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
@@ -103,4 +111,29 @@
     $(document).ready(function() {
         $('#dataTable').DataTable();
     });
+
+    function simpan() {
+        $.ajax({
+            url: "<?= base_url('master/add_bus') ?>",
+            type: "POST",
+            data: $('#form-add').serialize(),
+            beforeSend() {
+                $("#btn-add").attr("disabled", true);
+                loading();
+            },
+            success: function(response) {
+                $("#btn-add").attr("disabled", false);
+                success();
+            },
+            error: function(response) {
+                $("#btn-add").attr("disabled", false);
+                Swal.fire({
+                    icon: "error",
+                    title: 'Opps!',
+                    button: "Oke",
+                    text: response.responseJSON.messages
+                }).then(function() {})
+            }
+        });
+    }
 </script>
