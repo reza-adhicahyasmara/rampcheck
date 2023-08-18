@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2023 at 09:15 AM
+-- Generation Time: Aug 18, 2023 at 10:13 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -40,7 +40,8 @@ CREATE TABLE `master_bus` (
 --
 
 INSERT INTO `master_bus` (`id_bus`, `nomor_plat_kendaraan`, `nama_po`, `jenis_angkutan`, `trayek`) VALUES
-('asdasd', 'asdasd', 'dasda', 'dasd', 'dsawd');
+('1234W18', 'E1234YAH', 'SEHATI', 'AKAP', 'Kuningan-Sumatera'),
+('1423W18', 'E1423YAH', 'SEHATI', 'AKDP', 'Kuningan-Arab');
 
 -- --------------------------------------------------------
 
@@ -55,6 +56,13 @@ CREATE TABLE `master_sopir` (
   `telepon` text NOT NULL,
   `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `master_sopir`
+--
+
+INSERT INTO `master_sopir` (`id_sopir`, `nama_sopir`, `tgl_lahir`, `telepon`, `alamat`) VALUES
+(1, 'Budi sudarsono', '1989-08-16', '08123345682', 'Jl.Kenari');
 
 -- --------------------------------------------------------
 
@@ -112,7 +120,11 @@ CREATE TABLE `rampcheck` (
   `nama_penguji` text DEFAULT NULL,
   `nip_penguji` text DEFAULT NULL,
   `nama_penyidik` text DEFAULT NULL,
-  `nip_penyidik` text DEFAULT NULL
+  `nip_penyidik` text DEFAULT NULL,
+  `nama_po` text DEFAULT NULL,
+  `jenis_angkutan` text DEFAULT NULL,
+  `trayek` text DEFAULT NULL,
+  `nama_sopir` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -167,13 +179,13 @@ ALTER TABLE `rampcheck`
 -- AUTO_INCREMENT for table `master_sopir`
 --
 ALTER TABLE `master_sopir`
-  MODIFY `id_sopir` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sopir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rampcheck`
 --
 ALTER TABLE `rampcheck`
-  MODIFY `id_rampcheck` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rampcheck` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
