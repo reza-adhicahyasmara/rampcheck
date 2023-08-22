@@ -49,6 +49,9 @@
                         <a class="collapse-item <?php if ($this->uri->segment('2') == 'pengguna') {
                                                     echo "active";
                                                 } ?>" href="<?= base_url('master/pengguna') ?>">Pengguna</a>
+                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'struktural') {
+                                                    echo "active";
+                                                } ?>" href="<?= base_url('master/struktural') ?>">Struktural</a>
                     </div>
                 </div>
             </li>

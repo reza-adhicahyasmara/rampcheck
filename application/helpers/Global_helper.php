@@ -11,6 +11,28 @@ if (!function_exists('isPlatExist')) {
         return false;
     }
 }
+if (!function_exists('isUsernameExist')) {
+    function isUsernameExist($username)
+    {
+        $ci = &get_instance();
+        $res = $ci->db->query("SELECT count(id_user) as res from user where username='$username'")->row()->res;
+        if ($res) {
+            return true;
+        }
+        return false;
+    }
+}
+if (!function_exists('isAdminLeftOne')) {
+    function isAdminLeftOne()
+    {
+        $ci = &get_instance();
+        $res = $ci->db->query("SELECT count(id_user) as res from user where role=1")->row()->res;
+        if ($res==1) {
+            return true;
+        }
+        return false;
+    }
+}
 if (!function_exists('responseOK')) {
     function responseOK($message = null, $data = null)
     {

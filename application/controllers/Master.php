@@ -14,6 +14,15 @@ class Master extends CI_Controller
 		$data['data'] = $this->Global_model->get_all('master_sopir')->result();
 		$this->load->view('master/sopir', $data);
 	}
+	public function pengguna()
+	{
+		$data['data'] = $this->Global_model->get_all('user')->result();
+		$this->load->view('master/pengguna', $data);
+	}
+	public function struktural(){
+		$data['data'] = $this->Global_model->get_all('master_struktural')->row();
+		$this->load->view('master/struktural', $data);
+	}
 	public function add_bus()
 	{
 		$nomor_plat_kendaraan = $this->input->post('nomor_plat_kendaraan', true);
@@ -115,6 +124,56 @@ class Master extends CI_Controller
 			'id_sopir' => $id
 		);
 		$this->Global_model->delete('master_sopir', $param);
+		responseOK("Berhasil");
+	}
+	public function add_pengguna()
+	{
+		$username=$this->input->post('username',true);
+		$data = array(
+			'username' =>$username,
+			'password' => $this->input->post('password'),
+			'nama' => $this->input->post('nama_lengkap'),
+			'nip' => $this->input->post('nip'),
+			'role' => $this->input->post('role'),
+		);
+		if(isUsernameExist($username)){
+			return responseBAD("Username '".$username."' Telah di gunakan !");
+		}
+		$this->Global_model->insert('user', $data);
+		responseOK("Berhasil");
+	}
+	public function delete_pengguna()
+	{
+		$id = $this->input->post('id');
+		$role=$this->input->post('role');
+		$param = array(
+			'id_user' => $id
+		);
+		if(isAdminLeftOne()&& $role==1){
+			return responseBAD("Pengguna admin Hanya tersisa 1 maka Tidak bisa di hapus !");
+		}
+		$this->Global_model->delete('user', $param);
+		responseOK("Berhasil");
+	}
+	public function edit_pengguna()
+	{
+		$data = array(
+			'username' =>$this->input->post('username'),
+			'password' => $this->input->post('password'),
+			'nama' => $this->input->post('nama_lengkap'),
+			'nip' => $this->input->post('nip'),
+			'role' => $this->input->post('role'),
+		);
+		$where = array(
+			'id_user' => $this->input->post('id_user')
+		);
+		$this->Global_model->update('user', $where, $data);
+		responseOK("Berhasil");
+	}
+	public function edit_struktural(){
+		$nama_penyidik=$this->input->post('nama_penyidik');
+		$nip_penyidik=$this->input->post('nip_penyidik');
+		$this->db->query("INSERT INTO master_struktural (id_struktural, nama_penyidik, nip_penyidik) VALUES(1, '$nama_penyidik', '$nip_penyidik') ON DUPLICATE KEY UPDATE nama_penyidik='$nama_penyidik', nip_penyidik='$nip_penyidik'");
 		responseOK("Berhasil");
 	}
 }
