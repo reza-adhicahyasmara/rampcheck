@@ -4,6 +4,73 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Data - RAMPCHECK <i class="fa fa-bus"></i></h1>
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <a href="#collapseCardExample" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary">Filter Data <i class="fa fa-search"></i></h6>
+            </a>
+            <div class="collapse" id="collapseCardExample" style="">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <form action="<?= base_url('rampcheck/') ?>">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Dari Tanggal</label>
+                                        <input type="date" class="form-control" name="dari_tgl" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Hingga Tanggal</label>
+                                        <input type="date" class="form-control" name="hingga_tgl" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>BUS</label>
+                                        <select name="id_bus" class="form-control">
+                                            <option value="">--Semua Bus--</option>
+                                            <?php foreach ($bus as $buses) : ?>
+                                                <option value="<?= $buses->id_bus ?>"><?= $buses->nomor_plat_kendaraan . ' ' . $buses->nama_po . ' ' . $buses->jenis_angkutan . ' ' . $buses->trayek ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Sopir</label>
+                                        <select name="id_sopir" class="form-control">
+                                            <option value="">--Semua Sopir--</option>
+                                            <?php foreach ($sopir as $sopires) : ?>
+                                                <option value="<?= $sopires->id_sopir ?>"><?= $sopires->nama_sopir ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="id_sopir" class="form-control">
+                                            <option value="">--Semua Status--</option>
+                                            <option value="1">Laik Jalan</option>
+                                            <option value="2">Peringatan / Perbaiki</option>
+                                            <option value="3">Dilarang Operasional</option>
+                                            <option value="4">Tilang & Dilarang Operasional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <center><button type="submit" style="margin-top: 20px;" class="btn btn-primary">Filter <i class="fa fa-search"></i></button></center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="row">

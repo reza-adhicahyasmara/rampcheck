@@ -85,3 +85,4 @@ defined('EXIT__AUTO_MIN')      or define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 defined('VIGENERE_CIPHER_KEY')      or define('VIGENERE_CIPHER_KEY', "6W5FKY11OBMQLA2AR6MDITX7EJDXDH4X");
 defined('QR_PATH')             or define('QR_PATH', '/private/qr/');
+defined('QR_LOAD_PATH')             or define('QR_LOAD_PATH', 'private/qr/');
