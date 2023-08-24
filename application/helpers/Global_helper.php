@@ -211,3 +211,154 @@ ORDER BY date_range.date;
         ")->result();
     }
 }
+if (!function_exists('convertStatusAdministrasi')) {
+    function convertStatusAdministrasi($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Ada, Berlaku</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Berlaku</span>';
+        }
+        if ($status == 3) {
+            return '<span class="badge badge-danger">Tidak Ada</span>';
+        }
+        if ($status == 4) {
+            return '<span class="badge badge-danger">Tidak Sesuai Fisik</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertStatusSim')) {
+    function convertStatusSim($status)
+    {
+        if ($status == 11) {
+            return '<span class="badge badge-success">A Umum</span>';
+        }
+        if ($status == 12) {
+            return '<span class="badge badge-success">B1 Umum</span>';
+        }
+        if ($status == 13) {
+            return '<span class="badge badge-success">B2 Umum</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">SIM Tidak Sesuai</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertLampu')) {
+    function convertLampu($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Menyala</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Menyala</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertRem')) {
+    function convertRem($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Berfungsi</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Berfungsi</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertKaca')) {
+    function convertKaca($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Baik</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Buruk</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertBan')) {
+    function convertBan($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Laik</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Laik</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertSabuk')) {
+    function convertSabuk($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Ada dan Fungsi</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Fungsi</span>';
+        }
+        if ($status == 3) {
+            return '<span class="badge badge-danger">Tidak Ada</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertDarurat')) {
+    function convertDarurat($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Ada</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Ada</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertSpion')) {
+    function convertSpion($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Sesuai</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Sesuai</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+
+if (!function_exists('convertLantai')) {
+    function convertLantai($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Baik</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Keropos/Berlubang</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}
+if (!function_exists('convertBanCadangan')) {
+    function convertBanCadangan($status)
+    {
+        if ($status == 1) {
+            return '<span class="badge badge-success">Ada dan Laik</span>';
+        }
+        if ($status == 2) {
+            return '<span class="badge badge-danger">Tidak Laik</span>';
+        }
+        if ($status == 3) {
+            return '<span class="badge badge-danger">Tidak Ada</span>';
+        }
+        return '<span class="badge badge-secondary">Belum di isi</span>';
+    }
+}

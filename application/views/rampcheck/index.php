@@ -1,8 +1,6 @@
 <?php $this->load->view('partials/header.php') ?>
 <?php $this->load->view('partials/leftbar.php') ?>
 <div class="container-fluid">
-
-    <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Data - RAMPCHECK <i class="fa fa-bus"></i></h1>
     <div class="card shadow mb-4">
         <div class="card-body">
