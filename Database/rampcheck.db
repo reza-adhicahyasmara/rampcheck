@@ -1,14 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Waktu pembuatan: 22 Agu 2023 pada 22.24
--- Versi server: 5.7.26
--- Versi PHP: 5.6.40
+-- Host: 127.0.0.1
+-- Generation Time: Aug 24, 2023 at 11:03 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `rampcheck`
@@ -17,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_bus`
+-- Table structure for table `master_bus`
 --
 
 CREATE TABLE `master_bus` (
@@ -29,7 +36,7 @@ CREATE TABLE `master_bus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `master_bus`
+-- Dumping data for table `master_bus`
 --
 
 INSERT INTO `master_bus` (`id_bus`, `nomor_plat_kendaraan`, `nama_po`, `jenis_angkutan`, `trayek`) VALUES
@@ -39,7 +46,7 @@ INSERT INTO `master_bus` (`id_bus`, `nomor_plat_kendaraan`, `nama_po`, `jenis_an
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_sopir`
+-- Table structure for table `master_sopir`
 --
 
 CREATE TABLE `master_sopir` (
@@ -51,7 +58,7 @@ CREATE TABLE `master_sopir` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `master_sopir`
+-- Dumping data for table `master_sopir`
 --
 
 INSERT INTO `master_sopir` (`id_sopir`, `nama_sopir`, `tgl_lahir`, `telepon`, `alamat`) VALUES
@@ -60,7 +67,7 @@ INSERT INTO `master_sopir` (`id_sopir`, `nama_sopir`, `tgl_lahir`, `telepon`, `a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_struktural`
+-- Table structure for table `master_struktural`
 --
 
 CREATE TABLE `master_struktural` (
@@ -70,7 +77,7 @@ CREATE TABLE `master_struktural` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_struktural`
+-- Dumping data for table `master_struktural`
 --
 
 INSERT INTO `master_struktural` (`id_struktural`, `nama_penyidik`, `nip_penyidik`) VALUES
@@ -79,11 +86,11 @@ INSERT INTO `master_struktural` (`id_struktural`, `nama_penyidik`, `nip_penyidik
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rampcheck`
+-- Table structure for table `rampcheck`
 --
 
 CREATE TABLE `rampcheck` (
-  `id_rampcheck` int(11) NOT NULL,
+  `id_rampcheck` bigint(11) NOT NULL,
   `id_bus` varchar(12) DEFAULT NULL,
   `id_sopir` int(11) DEFAULT NULL,
   `kartu_uji_stuk` int(1) DEFAULT NULL,
@@ -92,6 +99,8 @@ CREATE TABLE `rampcheck` (
   `sim_pengemudi` int(1) DEFAULT NULL,
   `lampu_dekat_kanan` int(1) DEFAULT NULL,
   `lampu_dekat_kiri` int(1) DEFAULT NULL,
+  `lampu_jauh_kanan` int(1) DEFAULT NULL,
+  `lampu_jauh_kiri` int(1) DEFAULT NULL,
   `lampu_sein_depan_kanan` int(1) DEFAULT NULL,
   `lampu_sein_depan_kiri` int(1) DEFAULT NULL,
   `lampu_sein_belakang_kanan` int(1) DEFAULT NULL,
@@ -128,28 +137,32 @@ CREATE TABLE `rampcheck` (
   `dongkrak` int(1) DEFAULT NULL,
   `pembuka_roda` int(1) DEFAULT NULL,
   `lampu_senter` int(1) DEFAULT NULL,
-  `tanggal_pemeriksaan` datetime DEFAULT NULL,
-  `nama_penguji` text,
-  `nip_penguji` text,
-  `nama_penyidik` text,
-  `nip_penyidik` text,
-  `nama_po` text,
-  `jenis_angkutan` text,
-  `trayek` text,
-  `nama_sopir` text
+  `nama_penguji` text DEFAULT NULL,
+  `nip_penguji` text DEFAULT NULL,
+  `nama_penyidik` text DEFAULT NULL,
+  `nip_penyidik` text DEFAULT NULL,
+  `nama_po` text DEFAULT NULL,
+  `jenis_angkutan` text DEFAULT NULL,
+  `trayek` text DEFAULT NULL,
+  `nama_sopir` text DEFAULT NULL,
+  `tanggal_pemeriksaan` datetime DEFAULT current_timestamp(),
+  `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `rampcheck`
+-- Dumping data for table `rampcheck`
 --
 
-INSERT INTO `rampcheck` (`id_rampcheck`, `id_bus`, `id_sopir`, `kartu_uji_stuk`, `kp_reguler`, `kp_cadangan`, `sim_pengemudi`, `lampu_dekat_kanan`, `lampu_dekat_kiri`, `lampu_sein_depan_kanan`, `lampu_sein_depan_kiri`, `lampu_sein_belakang_kanan`, `lampu_sein_belakang_kiri`, `lampu_rem_kanan`, `lampu_rem_kiri`, `lampu_mundur_kanan`, `lampu_mundur_kiri`, `rem_utama`, `rem_parkir`, `kaca_depan`, `pintu_utama_depan`, `pintu_utama_belakang`, `ban_depan_kanan`, `ban_depan_kiri`, `ban_belakang_kanan`, `ban_belakang_kiri`, `sabuk_keselamatan`, `pengukur_kecepatan`, `penghapus_kaca`, `pintu_darurat`, `jendela_darurat`, `alat_pemecah_kaca`, `lampu_posisi_depan_kanan`, `lampu_posisi_depan_kiri`, `lampu_posisi_belakang_kanan`, `lampu_posisi_belakang_kiri`, `kaca_spion`, `klakson`, `lantai_dan_tangga`, `jalan_tempat_duduk_penumpang`, `ban_cadangan`, `segitiga_pengaman`, `dongkrak`, `pembuka_roda`, `lampu_senter`, `tanggal_pemeriksaan`, `nama_penguji`, `nip_penguji`, `nama_penyidik`, `nip_penyidik`, `nama_po`, `jenis_angkutan`, `trayek`, `nama_sopir`) VALUES
-(1, '1234W18', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `rampcheck` (`id_rampcheck`, `id_bus`, `id_sopir`, `kartu_uji_stuk`, `kp_reguler`, `kp_cadangan`, `sim_pengemudi`, `lampu_dekat_kanan`, `lampu_dekat_kiri`, `lampu_jauh_kanan`, `lampu_jauh_kiri`, `lampu_sein_depan_kanan`, `lampu_sein_depan_kiri`, `lampu_sein_belakang_kanan`, `lampu_sein_belakang_kiri`, `lampu_rem_kanan`, `lampu_rem_kiri`, `lampu_mundur_kanan`, `lampu_mundur_kiri`, `rem_utama`, `rem_parkir`, `kaca_depan`, `pintu_utama_depan`, `pintu_utama_belakang`, `ban_depan_kanan`, `ban_depan_kiri`, `ban_belakang_kanan`, `ban_belakang_kiri`, `sabuk_keselamatan`, `pengukur_kecepatan`, `penghapus_kaca`, `pintu_darurat`, `jendela_darurat`, `alat_pemecah_kaca`, `lampu_posisi_depan_kanan`, `lampu_posisi_depan_kiri`, `lampu_posisi_belakang_kanan`, `lampu_posisi_belakang_kiri`, `kaca_spion`, `klakson`, `lantai_dan_tangga`, `jalan_tempat_duduk_penumpang`, `ban_cadangan`, `segitiga_pengaman`, `dongkrak`, `pembuka_roda`, `lampu_senter`, `nama_penguji`, `nip_penguji`, `nama_penyidik`, `nip_penyidik`, `nama_po`, `jenis_angkutan`, `trayek`, `nama_sopir`, `tanggal_pemeriksaan`, `status`) VALUES
+(2023082300001, '1234W18', 1, 1, 1, 1, 11, 1, 1, NULL, NULL, 1, 1, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Tatang', '123.321.321', 'Maman Alidrouse', '321.123.222', NULL, NULL, NULL, NULL, '2023-08-23 10:03:06', 4),
+(2023082300002, '1234W18', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Tatang', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-23 10:03:06', 3),
+(2023082300003, '1234W18', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Tatang', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-23 10:03:06', 2),
+(2023082300004, '1234W18', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Tatang', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-23 10:03:06', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -162,7 +175,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `nip`, `role`) VALUES
@@ -175,53 +188,58 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `nip`, `role`) VA
 --
 
 --
--- Indeks untuk tabel `master_bus`
+-- Indexes for table `master_bus`
 --
 ALTER TABLE `master_bus`
   ADD PRIMARY KEY (`id_bus`);
 
 --
--- Indeks untuk tabel `master_sopir`
+-- Indexes for table `master_sopir`
 --
 ALTER TABLE `master_sopir`
   ADD PRIMARY KEY (`id_sopir`);
 
 --
--- Indeks untuk tabel `master_struktural`
+-- Indexes for table `master_struktural`
 --
 ALTER TABLE `master_struktural`
   ADD PRIMARY KEY (`id_struktural`);
 
 --
--- Indeks untuk tabel `rampcheck`
+-- Indexes for table `rampcheck`
 --
 ALTER TABLE `rampcheck`
   ADD PRIMARY KEY (`id_rampcheck`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `master_sopir`
+-- AUTO_INCREMENT for table `master_sopir`
 --
 ALTER TABLE `master_sopir`
   MODIFY `id_sopir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `rampcheck`
+-- AUTO_INCREMENT for table `rampcheck`
 --
 ALTER TABLE `rampcheck`
-  MODIFY `id_rampcheck` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_rampcheck` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2023082300005;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
