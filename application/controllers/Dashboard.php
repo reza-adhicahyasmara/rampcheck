@@ -13,6 +13,8 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('dashboard');
+		$data['donat'] = getGrafikDonat();
+		$data['line'] = getGrafikChart();
+		$this->load->view('dashboard', $data);
 	}
 }

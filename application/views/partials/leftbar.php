@@ -74,7 +74,7 @@
                                                 } ?>" href="<?= base_url('laporan/sopir') ?>">Sopir</a>
                         <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus') {
                                                     echo "active";
-                                                } ?>" href="<?= base_url('laporan/pengguna') ?>">Bus</a>
+                                                } ?>" href="<?= base_url('laporan/bus') ?>">Bus</a>
                     </div>
                 </div>
             </li>
@@ -101,7 +101,6 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('nama') ?></span>
                                 <img class="img-profile rounded-circle" src="<?= base_url('assets/') ?>img/undraw_profile.svg">
                             </a>
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item logout" onclick="logout()" href="#">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

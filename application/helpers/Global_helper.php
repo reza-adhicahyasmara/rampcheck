@@ -120,6 +120,23 @@ if (!function_exists('convertStatusRampcheck')) {
         }
     }
 }
+if (!function_exists('convertStatusRampchecktoText')) {
+    function convertStatusRampchecktoText($status)
+    {
+        if ($status == 1) {
+            return 'Laik Jalan';
+        }
+        if ($status == 2) {
+            return 'Peringatan / Perbaiki';
+        }
+        if ($status == 3) {
+            return 'Dilarang Operasional';
+        }
+        if ($status == 4) {
+            return 'Tilang & Dilarang Operasional';
+        }
+    }
+}
 if (!function_exists('limitText')) {
     function limitText($text)
     {
@@ -188,7 +205,7 @@ FROM (
     ) AS c
 ) AS date_range
 LEFT JOIN rampcheck ON DATE(rampcheck.tanggal_pemeriksaan) = date_range.date
-WHERE date_range.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+WHERE date_range.date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
 GROUP BY date_range.date
 ORDER BY date_range.date;
         ")->result();

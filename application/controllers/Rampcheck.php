@@ -18,4 +18,12 @@ class Rampcheck extends CI_Controller
 		$data['data'] = $this->Global_model->getRampcheck()->result();
 		$this->load->view('rampcheck/index', $data);
 	}
+	public function detail($id_rampcheck)
+	{
+		$where = array(
+			'id_rampcheck' => $id_rampcheck
+		);
+		$data['data'] = $this->Global_model->getRampcheck($where)->row();
+		$this->load->view('rampcheck/detail', $data);
+	}
 }
