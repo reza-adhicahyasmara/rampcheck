@@ -2,7 +2,7 @@
 <?php $this->load->view('partials/leftbar.php') ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="d-flex justify-content-between">
@@ -21,7 +21,7 @@
                                         </tr>
                                         <tr>
                                             <td>Tgl Lahir</td>
-                                            <td><?= $data->tgl_lahir ?></td>
+                                            <td><?= $data->tgl_lahir . ' (' . calculateAge($data->tgl_lahir) . ' Tahun)'  ?></td>
                                         </tr>
                                         <tr>
                                             <td>Telepon</td>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="d-flex justify-content-between">
@@ -67,6 +67,43 @@
                                         <tr>
                                             <td>Trayek</td>
                                             <td><?= $data->trayek ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Kesimpulan <i class="fa fa-address-card"></i></h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Penguji</td>
+                                            <td><?= $data->nama_penguji . ' | ' . $data->nip_penguji ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penyidik</td>
+                                            <td><?= $data->nama_penyidik . ' | ' . $data->nip_penyidik ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Waktu Pemeriksaan</td>
+                                            <td><?= $data->tanggal_pemeriksaan ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td><?= convertStatusRampcheck($data->status) ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -258,12 +295,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <br>
-                                    <h5>Kesimpulan</h5>
-                                    <p>Berdasarkan Hasil di atas, Maka kendaraan tersebut di nyatakan:</p>
-                                    <table></table>
-                                    <?= convertStatusRampcheck($data->status) ?>
-                                    <br>
                                 </div>
                             </div>
                         </div>

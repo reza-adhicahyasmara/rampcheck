@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td class="border">Tanggal Lahir</td>
-                    <td class="border"><b><?= $sopir->tgl_lahir ?></b></td>
+                    <td class="border"><b><?= $sopir->tgl_lahir . ' (' . calculateAge($sopir->tgl_lahir) . ' Tahun)' ?></b></td>
                 </tr>
                 <tr>
                     <td class="border">Telepon</td>

@@ -19,9 +19,30 @@ class Master extends CI_Controller
 		$data['data'] = $this->Global_model->get_all('user')->result();
 		$this->load->view('master/pengguna', $data);
 	}
-	public function struktural(){
+	public function struktural()
+	{
 		$data['data'] = $this->Global_model->get_all('master_struktural')->row();
 		$this->load->view('master/struktural', $data);
+	}
+	public function detail_bus($id_bus)
+	{
+		$where = array(
+			'id_bus' => $id_bus
+		);
+
+		$data['bus'] = $this->Global_model->get_by_id('master_bus', $where)->row();
+		$data['data'] = $this->Global_model->getRampcheck(['rampcheck.id_bus' => $id_bus])->result();
+		$this->load->view('master/detail_bus', $data);
+	}
+	public function detail_sopir($id_sopir)
+	{
+		$where = array(
+			'id_sopir' => $id_sopir
+		);
+
+		$data['sopir'] = $this->Global_model->get_by_id('master_sopir', $where)->row();
+		$data['data'] = $this->Global_model->getRampcheck(['rampcheck.id_sopir' => $id_sopir])->result();
+		$this->load->view('master/detail_sopir', $data);
 	}
 	public function add_bus()
 	{
@@ -128,16 +149,16 @@ class Master extends CI_Controller
 	}
 	public function add_pengguna()
 	{
-		$username=$this->input->post('username',true);
+		$username = $this->input->post('username', true);
 		$data = array(
-			'username' =>$username,
+			'username' => $username,
 			'password' => $this->input->post('password'),
 			'nama' => $this->input->post('nama_lengkap'),
 			'nip' => $this->input->post('nip'),
 			'role' => $this->input->post('role'),
 		);
-		if(isUsernameExist($username)){
-			return responseBAD("Username '".$username."' Telah di gunakan !");
+		if (isUsernameExist($username)) {
+			return responseBAD("Username '" . $username . "' Telah di gunakan !");
 		}
 		$this->Global_model->insert('user', $data);
 		responseOK("Berhasil");
@@ -145,11 +166,11 @@ class Master extends CI_Controller
 	public function delete_pengguna()
 	{
 		$id = $this->input->post('id');
-		$role=$this->input->post('role');
+		$role = $this->input->post('role');
 		$param = array(
 			'id_user' => $id
 		);
-		if(isAdminLeftOne()&& $role==1){
+		if (isAdminLeftOne() && $role == 1) {
 			return responseBAD("Pengguna admin Hanya tersisa 1 maka Tidak bisa di hapus !");
 		}
 		$this->Global_model->delete('user', $param);
@@ -158,7 +179,7 @@ class Master extends CI_Controller
 	public function edit_pengguna()
 	{
 		$data = array(
-			'username' =>$this->input->post('username'),
+			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
 			'nama' => $this->input->post('nama_lengkap'),
 			'nip' => $this->input->post('nip'),
@@ -170,9 +191,10 @@ class Master extends CI_Controller
 		$this->Global_model->update('user', $where, $data);
 		responseOK("Berhasil");
 	}
-	public function edit_struktural(){
-		$nama_penyidik=$this->input->post('nama_penyidik');
-		$nip_penyidik=$this->input->post('nip_penyidik');
+	public function edit_struktural()
+	{
+		$nama_penyidik = $this->input->post('nama_penyidik');
+		$nip_penyidik = $this->input->post('nip_penyidik');
 		$this->db->query("INSERT INTO master_struktural (id_struktural, nama_penyidik, nip_penyidik) VALUES(1, '$nama_penyidik', '$nip_penyidik') ON DUPLICATE KEY UPDATE nama_penyidik='$nama_penyidik', nip_penyidik='$nip_penyidik'");
 		responseOK("Berhasil");
 	}

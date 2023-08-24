@@ -40,10 +40,10 @@
                                                             echo "show";
                                                         } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus') {
+                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus' || $this->uri->segment('2') == 'detail_bus') {
                                                     echo "active";
                                                 } ?>" href="<?= base_url('master/bus') ?>">Bus</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir') {
+                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir' || $this->uri->segment('2') == 'detail_sopir') {
                                                     echo "active";
                                                 } ?>" href="<?= base_url('master/sopir') ?>">Sopir</a>
                         <a class="collapse-item <?php if ($this->uri->segment('2') == 'pengguna') {
