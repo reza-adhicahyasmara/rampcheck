@@ -26,8 +26,18 @@ class Auth extends CI_Controller
                 'id_user' => $row->id_user,
                 'username' => $row->username,
                 'nama' => $row->nama,
-                'nip' => $row->nip
+                'nip' => $row->nip,
+                'role' => $row->role
             );
+            if ($row->role == 2) {
+                return $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(500)
+                    ->set_output(json_encode(array(
+                        'status' => False,
+                        'messages' => 'Role Akun Tidak Sesuai !'
+                    )));
+            }
             $this->session->set_userdata($params);
             return $this->output
                 ->set_content_type('application/json')

@@ -8,76 +8,116 @@
                 <div class="sidebar-brand-text mx-3">RAMPCHECK <sup>KNG</sup></div>
             </a>
             <hr class="sidebar-divider my-0">
-            <li class="nav-item <?php if ($this->uri->segment('1') == 'dashboard') {
-                                    echo "active";
-                                } ?>">
-                <a class="nav-link" href="<?= base_url('dashboard') ?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <li class="nav-item <?php if ($this->uri->segment('1') == 'rampcheck') {
-                                    echo "active";
-                                } ?>">
-                <a class="nav-link" href="<?= base_url('rampcheck') ?>">
-                    <i class="fas fa-fw fa-check-circle"></i>
-                    <span>Rampcheck</span></a>
-            </li>
-            <li class="nav-item <?php if ($this->uri->segment('1') == 'cetak') {
-                                    echo "active";
-                                } ?>">
-                <a class="nav-link" href="<?= base_url('cetak/label') ?>">
-                    <i class="fas fa-fw fa-print"></i>
-                    <span>Cetak Label</span></a>
-            </li>
-            <li class="nav-item <?php if ($this->uri->segment('1') == 'master') {
-                                    echo "active";
-                                } ?>">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Master</span>
-                </a>
-                <div id="collapsePages" class="collapse <?php if ($this->uri->segment('1') == 'master') {
-                                                            echo "show";
-                                                        } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus' || $this->uri->segment('2') == 'detail_bus') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('master/bus') ?>">Bus</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir' || $this->uri->segment('2') == 'detail_sopir') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('master/sopir') ?>">Sopir</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'pengguna') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('master/pengguna') ?>">Pengguna</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'struktural') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('master/struktural') ?>">Struktural</a>
+            <?php if ($this->session->userdata('role') == 3) { ?>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'dashboard') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="<?= base_url('dashboard') ?>">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'rampcheck') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="<?= base_url('rampcheck') ?>">
+                        <i class="fas fa-fw fa-check-circle"></i>
+                        <span>Rampcheck</span></a>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'laporan') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-file-pdf"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse <?php if ($this->uri->segment('1') == 'laporan') {
+                                                                echo "show";
+                                                            } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'rampcheck') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/rampcheck') ?>">Rampcheck</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/sopir') ?>">Sopir</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/bus') ?>">Bus</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="nav-item <?php if ($this->uri->segment('1') == 'laporan') {
-                                    echo "active";
-                                } ?>">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-file-pdf"></i>
-                    <span>Laporan</span>
-                </a>
-                <div id="collapseTwo" class="collapse <?php if ($this->uri->segment('1') == 'laporan') {
-                                                            echo "show";
-                                                        } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'rampcheck') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('laporan/rampcheck') ?>">Rampcheck</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('laporan/sopir') ?>">Sopir</a>
-                        <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus') {
-                                                    echo "active";
-                                                } ?>" href="<?= base_url('laporan/bus') ?>">Bus</a>
+                </li>
+            <?php } else { ?>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'dashboard') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="<?= base_url('dashboard') ?>">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'rampcheck') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="<?= base_url('rampcheck') ?>">
+                        <i class="fas fa-fw fa-check-circle"></i>
+                        <span>Rampcheck</span></a>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'cetak') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="<?= base_url('cetak/label') ?>">
+                        <i class="fas fa-fw fa-print"></i>
+                        <span>Cetak Label</span></a>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'master') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Master</span>
+                    </a>
+                    <div id="collapsePages" class="collapse <?php if ($this->uri->segment('1') == 'master') {
+                                                                echo "show";
+                                                            } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus' || $this->uri->segment('2') == 'detail_bus') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('master/bus') ?>">Bus</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir' || $this->uri->segment('2') == 'detail_sopir') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('master/sopir') ?>">Sopir</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'pengguna') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('master/pengguna') ?>">Pengguna</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'struktural') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('master/struktural') ?>">Struktural</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+                <li class="nav-item <?php if ($this->uri->segment('1') == 'laporan') {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-file-pdf"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse <?php if ($this->uri->segment('1') == 'laporan') {
+                                                                echo "show";
+                                                            } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'rampcheck') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/rampcheck') ?>">Rampcheck</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'sopir') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/sopir') ?>">Sopir</a>
+                            <a class="collapse-item <?php if ($this->uri->segment('2') == 'bus') {
+                                                        echo "active";
+                                                    } ?>" href="<?= base_url('laporan/bus') ?>">Bus</a>
+                        </div>
+                    </div>
+                </li>
+            <?php } ?>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
