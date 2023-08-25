@@ -41,11 +41,50 @@
                 </div>
             </div>
         </div>
+        <div class="col-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Algoritma Vigenere Cipher <i class="fa fa-qrcode"></i></h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <p>Vigenere Cipher adalah sebuah metode enkripsi klasik yang digunakan untuk mengamankan teks dengan menggunakan kunci yang lebih panjang daripada pesan yang akan dienkripsi</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Sebelum Enkripsi</td>
+                                            <td><?= $bus->nomor_plat_kendaraan ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kode Enkripsi (KEY)</td>
+                                            <td><?= VIGENERE_CIPHER_KEY ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Setelah Enkripsi</td>
+                                            <td><span class="badge badge-success"><?= $bus->id_bus ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Barcode</td>
+                                            <td><img width="100px" src="<?= base_url() . QR_LOAD_PATH . $bus->id_bus . '.png' ?>" alt=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Rampcheck Yang telah di lakukan</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Rampcheck Yang telah di lakukan oleh BUS ini</h6>
                     </div>
                 </div>
                 <div class="card-body">

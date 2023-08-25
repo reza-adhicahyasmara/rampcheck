@@ -36,7 +36,7 @@
             border-radius: 10px;
         }
     </style>
-    <title>Laporan barang</title>
+    <title>Laporan RAMPCHECK</title>
 </head>
 
 <body>

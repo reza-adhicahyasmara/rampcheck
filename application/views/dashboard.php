@@ -5,6 +5,29 @@
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
     <div class="row">
+        <div class="card shadow col-md-12 col-md-6 mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#collapseCardExample" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary">Vigenere Cipher <i class="fa fa-qrcode"></i></h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse" id="collapseCardExample" style="">
+                <div class="card-body">
+                    Vigenere Cipher adalah sebuah metode enkripsi klasik yang digunakan untuk mengamankan teks dengan menggunakan kunci yang lebih panjang daripada pesan yang akan dienkripsi. Berikut adalah penjelasan singkat tentang cara Vigenere Cipher bekerja:
+
+                    Kunci: Anda memerlukan sebuah kunci yang terdiri dari sebuah kata atau frasa. Kunci ini akan digunakan untuk mengenkripsi dan mendekripsi pesan.
+
+                    Konversi Huruf ke Angka: Setiap huruf dalam pesan yang akan dienkripsi dikonversi menjadi angka berdasarkan urutan alfabet, misalnya A=0, B=1, C=2, dan seterusnya.
+
+                    Proses Enkripsi: Untuk mengenkripsi pesan, setiap karakter dalam pesan dijumlahkan dengan karakter yang sesuai dalam kunci. Jika pesan lebih panjang dari kunci, kunci akan diulang-ulang hingga mencapai panjang pesan.
+
+                    Proses Dekripsi: Untuk mendekripsi pesan yang telah dienkripsi, Anda mengurangkan karakter kunci dari karakter dalam pesan yang dienkripsi. <br>
+
+                    <br>
+                    Penggunaan dalam aplikasi ini terdapat pada pembuatan data BUS dengan mengenkripsi Nomor Plat Kendaraan untuk di gunakan sebagai primary key, dapat di lihat pada menu <a href="<?= base_url('master/bus') ?>">Master BUS</a>
+                </div>
+            </div>
+        </div>
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
