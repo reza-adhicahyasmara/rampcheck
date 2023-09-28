@@ -362,3 +362,16 @@ if (!function_exists('convertBanCadangan')) {
         return '<span class="badge badge-secondary">Belum di isi</span>';
     }
 }
+if (!function_exists('getDashboardAndroid')) {
+    function getDashboardAndroid()
+    {
+        $ci = &get_instance();
+        return $ci->db->query("SELECT 
+        SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS satu, 
+        SUM(CASE WHEN status = 2 THEN 1 ELSE 0 END) AS dua, 
+        SUM(CASE WHEN status = 3 THEN 1 ELSE 0 END) AS tiga, 
+        SUM(CASE WHEN status = 4 THEN 1 ELSE 0 END) AS empat,
+        (SELECT COUNT(id_rampcheck) FROM rampcheck) AS res 
+    FROM rampcheck;")->row();
+    }
+}
