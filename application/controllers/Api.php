@@ -45,7 +45,7 @@ class Api extends CI_Controller  {
             )));
     }   
     public function dashboard(){
-            $data=getDashboardAndroid()->row();
+            $data=getDashboardAndroid();
            return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
