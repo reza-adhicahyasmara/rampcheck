@@ -1,110 +1,143 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 Header('Access-Control-Allow-Origin: *');
-class Api extends CI_Controller  {
+class Api extends CI_Controller
+{
 
-    public function login(){
-        $username=$this->input->post('username');
-        $password=$this->input->post('password');
-        $data=array(
-            'username'=>$username,
-            'password'=>$password,
+    public function login()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $data = array(
+            'username' => $username,
+            'password' => $password,
         );
-        $result=$this->Authentication->login($data);
-        if($result->num_rows() == 0){
+        $result = $this->Authentication->login($data);
+        if ($result->num_rows() == 0) {
             return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(500)
-            ->set_output(json_encode(array(
+                ->set_content_type('application/json')
+                ->set_status_header(500)
+                ->set_output(json_encode(array(
                     'status' => False,
                     'messages' => 'Username Atau Password salah !'
-            )));
+                )));
         }
-         $row=$result->row();
-         if($row->role !=2){
+        $row = $result->row();
+        if ($row->role != 2) {
             return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(500)
-            ->set_output(json_encode(array(
+                ->set_content_type('application/json')
+                ->set_status_header(500)
+                ->set_output(json_encode(array(
                     'status' => False,
                     'messages' => 'Akun ini bukan akun Checker Rampcheck'
-            )));
-         }
-            $params=array(
-                'id_user'=>$row->id_user,
-                'username'=>$row->username,
-                'nama'=>$row->nama,
-            );
-            return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode(array(
-                    'status' => true,
-                    'messages' => 'Login Sukses',
-                    'data'=>$params
-            )));
-    }   
-    public function dashboard(){
-            $data=getDashboardAndroid();
-           return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($data
-            ));
-    }
-    public function getAllCheck(){
-        $data=$this->Global_model->getRampcheck()->result();
-        $response=array(
-            'data'=>$data
+                )));
+        }
+        $params = array(
+            'id_user' => $row->id_user,
+            'username' => $row->username,
+            'nama' => $row->nama,
         );
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
-            ->set_output(json_encode($response
+            ->set_output(json_encode(array(
+                'status' => true,
+                'messages' => 'Login Sukses',
+                'data' => $params
+            )));
+    }
+    public function dashboard()
+    {
+        $data = getDashboardAndroid();
+        $response = array(
+            'data' => $data
+        );
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
             ));
     }
-    public function detailCheck(){
-        $idRampcheck=$this->input->post('id_rampcheck');
-        $where = array(
-			'id_rampcheck' => $idRampcheck
-		);
-		$data = $this->Global_model->getRampcheck($where)->row();
-        return $this->output
-        ->set_content_type('application/json')
-        ->set_status_header(200)
-        ->set_output(json_encode($data
-        ));
-    }
-    public function detailCheckWebView($idRampcheck){
-        $where = array(
-			'id_rampcheck' => $idRampcheck
-		);
-		$data['data'] = $this->Global_model->getRampcheck($where)->row();
-        $this->load->view('rampcheck',$data);
-    }
-    public function scanBarcode(){
-        $id_bus=$this->input->post('id_bus');
-        $where=array(
-            'id_bus'=>$id_bus
+    public function getAllSopir()
+    {
+        $data = $this->Global_model->get_all('master_sopir')->result();
+        $response = array(
+            'data' => $data
         );
-        $result=$this->Global_model->get_by_id('master_bus',$where);
-        if($result->num_rows()==0){
-            return $this->output
+        return $this->output
             ->set_content_type('application/json')
-            ->set_status_header(500)
-            ->set_output(json_encode(array(
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
+            ));
+    }
+    public function getAllCheck()
+    {
+        $data = $this->Global_model->getRampcheck()->result();
+        $response = array(
+            'data' => $data
+        );
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
+            ));
+    }
+    public function detailCheck()
+    {
+        $idRampcheck = $this->input->post('id_rampcheck');
+        $where = array(
+            'id_rampcheck' => $idRampcheck
+        );
+        $data = $this->Global_model->getRampcheck($where)->row();
+        $response = array(
+            'data' => $data
+        );
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
+            ));
+    }
+    public function detailCheckWebView($idRampcheck)
+    {
+        $where = array(
+            'id_rampcheck' => $idRampcheck
+        );
+        $data['data'] = $this->Global_model->getRampcheck($where)->row();
+        $this->load->view('rampcheck', $data);
+    }
+    public function scanBarcode()
+    {
+        $id_bus = $this->input->post('id_bus');
+        $where = array(
+            'id_bus' => $id_bus
+        );
+        $result = $this->Global_model->get_by_id('master_bus', $where);
+        if ($result->num_rows() == 0) {
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(500)
+                ->set_output(json_encode(array(
                     'status' => False,
                     'messages' => 'Barcode atau BUS tidak terdaftar !'
-            )));
+                )));
         }
+        $response = array(
+            'data' => $result->row()
+        );
         return $this->output
-        ->set_content_type('application/json')
-        ->set_status_header(200)
-        ->set_output(json_encode(
-            $result->row()
-        ));
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
+            ));
     }
-    public function insertRampcheck(){
+    public function insertRampcheck()
+    {
         $id_bus = $this->input->post('id_bus');
         $id_sopir = $this->input->post('id_sopir');
         $kartu_uji_stuk = $this->input->post('kartu_uji_stuk');
@@ -220,16 +253,16 @@ class Api extends CI_Controller  {
             'tanggal_pemeriksaan' => $tanggal_pemeriksaan,
             'status' => $status
         );
-        $data = $this->Global_model->insertcallback('rampcheck',$data);
-        $response=array(
-            'messages'=>'Data Rampcheck Berhasil di simpan !',
-            'id_rampcheck'=>$data
+        $data = $this->Global_model->insertcallback('rampcheck', $data);
+        $response = array(
+            'messages' => 'Data Rampcheck Berhasil di simpan !',
+            'id_rampcheck' => $data
         );
         return $this->output
-        ->set_content_type('application/json')
-        ->set_status_header(200)
-        ->set_output(json_encode($response
-        ));
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode(
+                $response
+            ));
     }
 }
-
