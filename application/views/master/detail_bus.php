@@ -62,7 +62,7 @@
                                         </tr>
                                         <tr>
                                             <td>Kode Enkripsi (KEY)</td>
-                                            <td><?= VIGENERE_CIPHER_KEY ?></td>
+                                            <td>6W5FKY11OBMQLA2AR6MDITX7EJDXDH4X</td>
                                         </tr>
                                         <tr>
                                             <td>Setelah Enkripsi</td>

@@ -83,6 +83,6 @@ defined('EXIT_USER_INPUT')     or define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       or define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      or define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
-defined('VIGENERE_CIPHER_KEY')      or define('VIGENERE_CIPHER_KEY', "6W5FKY11OBMQLA2AR6MDITX7EJDXDH4X");
+defined('VIGENERE_CIPHER_KEY')      or define('VIGENERE_CIPHER_KEY', "KEY");
 defined('QR_PATH')             or define('QR_PATH', '/private/qr/');
 defined('QR_LOAD_PATH')             or define('QR_LOAD_PATH', 'private/qr/');
