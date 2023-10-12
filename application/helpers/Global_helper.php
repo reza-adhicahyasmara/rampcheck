@@ -375,3 +375,270 @@ if (!function_exists('getDashboardAndroid')) {
     FROM rampcheck;")->row();
     }
 }
+if (!function_exists('getUserById')) {
+    function getUserById($id_user)
+    {
+        $ci = &get_instance();
+        return $ci->db->query("SELECT * FROM user where id_user=$id_user")->row();
+    }
+}
+if (!function_exists('getPenyidik')) {
+    function getPenyidik()
+    {
+        $ci = &get_instance();
+        return $ci->db->query("SELECT * FROM master_struktural where id_struktural=1")->row();
+    }
+}
+if (!function_exists('getBusById')) {
+    function getBusById($id_bus)
+    {
+        $ci = &get_instance();
+        return $ci->db->query("SELECT * FROM master_bus where id_bus=$id_bus")->row();
+    }
+}
+if (!function_exists('getSopirById')) {
+    function getSopirById($id_sopir)
+    {
+        $ci = &get_instance();
+        return $ci->db->query("SELECT * FROM master_sopir where id_sopir=$id_sopir")->row();
+    }
+}
+if (!function_exists('generateStatusRampcheck')) {
+    function generateStatusRampcheck($data)
+    {
+    }
+}
+if (!function_exists('getValueForStatusAdministrasi')) {
+    function getValueForStatusAdministrasi($string)
+    {
+        $mapping = [
+            'Ada, Berlaku' => 1,
+            'Tidak Berlaku' => 2,
+            'Tidak Ada' => 3,
+            'Tidak Sesuai Fisik' => 4
+        ];
+
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusSim')) {
+    function getValueForStatusSim($string)
+    {
+        $mapping = [
+            'A UMUM' => 11,
+            'B1 UMUM' => 12,
+            'B2 UMUM' => 13,
+            'SIM Tidak Sesuai' => 2
+        ];
+
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusLampu')) {
+    function getValueForStatusLampu($string)
+    {
+        if ($string == 'Semua Menyala') {
+            $result = [
+                'kanan' => 1,
+                'kiri' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Kanan Tidak Menyala') {
+            $result = [
+                'kanan' => 2,
+                'kiri' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Kiri Tidak Menyala') {
+            $result = [
+                'kanan' => 1,
+                'kiri' => 2
+            ];
+            return $result;
+        }
+        if ($string == 'Kiri dan Kanan Tidak Menyala') {
+            $result = [
+                'kanan' => 2,
+                'kiri' => 2
+            ];
+            return $result;
+        }
+        $result = [
+            'kanan' => null,
+            'kiri' => null
+        ];
+        return $result;
+    }
+}
+if (!function_exists('getValueForStatusPengereman')) {
+    function getValueForStatusPengereman($string)
+    {
+        $mapping = [
+            'Berfungsi' => 1,
+            'Tidak Berfungsi' => 2,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusKondisiKacaDepan')) {
+    function getValueForStatusKondisiKacaDepan($string)
+    {
+        $mapping = [
+            'Baik' => 1,
+            'Buruk' => 2,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusPintuUtama')) {
+    function getValueForStatusPintuUtama($string)
+    {
+        if ($string == 'Semua Berfungsi') {
+            $result = [
+                'depan' => 1,
+                'belakang' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Depan Tidak Berfungsi') {
+            $result = [
+                'depan' => 2,
+                'belakang' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Belakang Tidak Berfungsi') {
+            $result = [
+                'depan' => 1,
+                'belakang' => 2
+            ];
+            return $result;
+        }
+        if ($string == 'Depan dan Belakang Tidak Berfungsi') {
+            $result = [
+                'depan' => 2,
+                'belakang' => 2
+            ];
+            return $result;
+        }
+        $result = [
+            'depan' => null,
+            'belakang' => null
+        ];
+        return $result;
+    }
+}
+if (!function_exists('getValueForStatusKondisiBan')) {
+    function getValueForStatusKondisiBan($string)
+    {
+        if ($string == 'Semua Laik') {
+            $result = [
+                'kanan' => 1,
+                'kiri' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Kanan Tidak Laik') {
+            $result = [
+                'kanan' => 2,
+                'kiri' => 1
+            ];
+            return $result;
+        }
+        if ($string == 'Kiri Tidak Laik') {
+            $result = [
+                'kanan' => 1,
+                'kiri' => 2
+            ];
+            return $result;
+        }
+        if ($string == 'Kiri dan Kanan Tidak Laik') {
+            $result = [
+                'kanan' => 2,
+                'kiri' => 2
+            ];
+            return $result;
+        }
+        $result = [
+            'kanan' => null,
+            'kiri' => null
+        ];
+        return $result;
+    }
+}
+if (!function_exists('getValueForStatusPerlengkapan')) {
+    function getValueForStatusPerlengkapan($string)
+    {
+        $mapping = [
+            'Ada dan Fungsi' => 1,
+            'Tidak Berfungsi' => 2,
+            'Tidak Ada' => 3,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusTanggapDarurat')) {
+    function getValueForStatusTanggapDarurat($string)
+    {
+        $mapping = [
+            'Ada' => 1,
+            'Tidak Ada' => 2,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusKacaSpion')) {
+    function getValueForStatusKacaSpion($string)
+    {
+        $mapping = [
+            'Sesuai' => 1,
+            'Tidak Sesuai' => 2,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusKlakson')) {
+    function getValueForStatusKlakson($string)
+    {
+        $mapping = [
+            'Ada' => 1,
+            'Tidak Berfungsi' => 2,
+            'Tidak Ada' => 3,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusLantaiDanTangga')) {
+    function getValueForStatusLantaiDanTangga($string)
+    {
+        $mapping = [
+            'Baik' => 1,
+            'Keropos/Berlubang' => 2,
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusBanCadangan')) {
+    function getValueForStatusBanCadangan($string)
+    {
+        $mapping = [
+            'Ada dan Laik' => 1,
+            'Tidak Laik' => 2,
+            'Tidak Ada' => 3
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('getValueForStatusLampuSenter')) {
+    function getValueForStatusLampuSenter($string)
+    {
+        $mapping = [
+            'Ada' => 1,
+            'Tidak Berfungsi' => 2,
+            'Tidak Ada' => 3
+        ];
+        return $mapping[$string] ?? null;
+    }
+}
