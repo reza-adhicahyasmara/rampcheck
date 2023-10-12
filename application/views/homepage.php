@@ -58,7 +58,7 @@
     <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
       <h1>Terminal TIPE A Kuningan</h1>
       <h2>Jl. Mochamad Yamin No.48, Babakanreuma, Kec. Sindangagung, Kabupaten Kuningan, Jawa Barat 45573</h2>
-      <img src="<?= base_url('assets/') ?>img/terminal.jpg" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
+      <img src="<?= base_url('assets/') ?>img/terminal.jpeg" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
     </div>
 
   </section><!-- End Hero -->
