@@ -393,7 +393,7 @@ if (!function_exists('getBusById')) {
     function getBusById($id_bus)
     {
         $ci = &get_instance();
-        return $ci->db->query("SELECT * FROM master_bus where id_bus=$id_bus")->row();
+        return $ci->db->query("SELECT * FROM master_bus where id_bus='$id_bus'")->row();
     }
 }
 if (!function_exists('getSopirById')) {
@@ -406,6 +406,58 @@ if (!function_exists('getSopirById')) {
 if (!function_exists('generateStatusRampcheck')) {
     function generateStatusRampcheck($data)
     {
+        if ($data['kartu_uji_stuk'] != 1 || $data['kp_reguler'] != 1 || $data['kp_cadangan'] != 1 || $data['sim_pengemudi'] == 2) {
+            return 4;
+        }
+        if (
+            $data['lampu_dekat_kanan'] != 1 ||
+            $data['lampu_dekat_kiri'] != 1 ||
+            $data['lampu_jauh_kanan'] != 1 ||
+            $data['lampu_jauh_kiri'] != 1 ||
+            $data['lampu_sein_depan_kanan'] != 1 ||
+            $data['lampu_sein_depan_kiri'] != 1 ||
+            $data['lampu_sein_belakang_kanan'] != 1 ||
+            $data['lampu_sein_belakang_kiri'] != 1 ||
+            $data['lampu_rem_kanan'] != 1 ||
+            $data['lampu_rem_kiri'] != 1 ||
+            $data['lampu_mundur_kanan'] != 1 ||
+            $data['lampu_mundur_kiri'] != 1 ||
+            $data['rem_utama'] != 1 ||
+            $data['rem_parkir'] != 1 ||
+            $data['kaca_depan'] != 1 ||
+            $data['pintu_utama_depan'] != 1 ||
+            $data['pintu_utama_belakang'] != 1 ||
+            $data['ban_depan_kanan'] != 1 ||
+            $data['ban_depan_kiri'] != 1 ||
+            $data['ban_belakang_kanan'] != 1 ||
+            $data['ban_belakang_kiri'] != 1 ||
+            $data['sabuk_keselamatan'] != 1 ||
+            $data['pengukur_kecepatan'] != 1 ||
+            $data['penghapus_kaca'] != 1 ||
+            $data['pintu_darurat'] != 1 ||
+            $data['jendela_darurat'] != 1 ||
+            $data['alat_pemecah_kaca'] != 1
+        ) {
+            return 3;
+        }
+        if (
+            $data['lampu_posisi_depan_kanan'] != 1 ||
+            $data['lampu_posisi_depan_kiri'] != 1 ||
+            $data['lampu_posisi_belakang_kanan'] != 1 ||
+            $data['lampu_posisi_belakang_kiri'] != 1 ||
+            $data['kaca_spion'] != 1 ||
+            $data['klakson'] != 1 ||
+            $data['lantai_dan_tangga'] != 1 ||
+            $data['jalan_tempat_duduk_penumpang'] != 1 ||
+            $data['ban_cadangan'] != 1 ||
+            $data['segitiga_pengaman'] != 1 ||
+            $data['dongkrak'] != 1 ||
+            $data['pembuka_roda'] != 1 ||
+            $data['lampu_senter'] != 1
+        ) {
+            return 2;
+        }
+        return 1;
     }
 }
 if (!function_exists('getValueForStatusAdministrasi')) {
@@ -640,5 +692,19 @@ if (!function_exists('getValueForStatusLampuSenter')) {
             'Tidak Ada' => 3
         ];
         return $mapping[$string] ?? null;
+    }
+}
+if (!function_exists('generateRampcheckId')) {
+    function generateRampcheckId()
+    {
+        $ci = &get_instance();
+        $year = date('Y');
+        $month = date('m');
+        $day = date('d');
+        $result = $ci->db->query("SELECT * FROM rampcheck WHERE month(tanggal_pemeriksaan)=$month and YEAR(tanggal_pemeriksaan)=$year and DAY(tanggal_pemeriksaan)=$day ")->num_rows();
+        if ($result == 0) {
+            return date("Ymd") . "00001";
+        }
+        return date("Ymd") . sprintf("%05s", $result);
     }
 }

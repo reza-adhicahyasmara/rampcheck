@@ -200,8 +200,9 @@ class Api extends CI_Controller
         $ban_belakang_detail = getValueForStatusKondisiBan($kondisi_ban_belakang);
         $lampu_posisi_depan_detail = getValueForStatusLampu($lampu_posisi_depan);
         $lampu_posisi_belakang_detail = getValueForStatusLampu($lampu_posisi_belakang);
+        $id_rampcheck = generateRampcheckId();
         $data = array(
-            'id_user' => $id_user,
+            'id_rampcheck' => $id_rampcheck,
             'id_bus' => $id_bus,
             'id_sopir' => $id_sopir,
             'kartu_uji_stuk' => getValueForStatusAdministrasi($kartu_uji_stuk),
@@ -232,9 +233,9 @@ class Api extends CI_Controller
             'sabuk_keselamatan' => getValueForStatusPerlengkapan($sabuk_keselamatan_pengemudi),
             'pengukur_kecepatan' =>  getValueForStatusPerlengkapan($pengukur_kecepatan),
             'penghapus_kaca' =>  getValueForStatusPerlengkapan($penghapus_kaca),
-            'pintu_darurat' => getValueForStatusPerlengkapan($pintu_darurat),
-            'jendela_darurat' =>  getValueForStatusPerlengkapan($jendela_darurat),
-            'alat_pemecah_kaca' => getValueForStatusPerlengkapan($alat_pemukul_pemecah_kaca),
+            'pintu_darurat' => getValueForStatusTanggapDarurat($pintu_darurat),
+            'jendela_darurat' =>  getValueForStatusTanggapDarurat($jendela_darurat),
+            'alat_pemecah_kaca' => getValueForStatusTanggapDarurat($alat_pemukul_pemecah_kaca),
             'lampu_posisi_depan_kanan' => $lampu_posisi_depan_detail['kanan'],
             'lampu_posisi_depan_kiri' => $lampu_posisi_depan_detail['kiri'],
             'lampu_posisi_belakang_kanan' => $lampu_posisi_belakang_detail['kanan'],
@@ -258,10 +259,10 @@ class Api extends CI_Controller
             'nama_sopir' => $nama_sopir,
         );
         $data['status'] = generateStatusRampcheck($data);
-        $data = $this->Global_model->insertcallback('rampcheck', $data);
+        $data = $this->Global_model->insert('rampcheck', $data);
         $response = array(
             'messages' => 'Data Rampcheck Berhasil di simpan !',
-            'id_rampcheck' => $data
+            'data' => ['id_rampcheck' => $id_rampcheck]
         );
         return $this->output
             ->set_content_type('application/json')
