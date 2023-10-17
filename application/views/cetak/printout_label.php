@@ -25,18 +25,11 @@
             <tbody>
                 <tr>
                     <td colspan="3">
-                        <center>RAMPCHECK</center>
+                        <center>TTA KUNINGAN</center>
                     </td>
                 </tr>
                 <tr>
-                    <td><img style="width:100px;" src="<?= base_url('assets/img/logo-dinas.jpg') ?>" alt=""></td>
-                    <td>
-                        <center>
-                            <h3><?= $detail_bus->nama_po ?></h3>
-                            <h3 style="margin-bottom:0;"><?= $detail_bus->jenis_angkutan ?></h3>
-                            <p style="font-size: 6pt;"><?= $detail_bus->trayek ?></p>
-                        </center>
-                    </td>
+                  
                     <td>
                         <center>
                             <img style="width:100px;" src="<?= base_url(QR_LOAD_PATH) . $detail_bus->id_bus . '.png' ?>" alt="">

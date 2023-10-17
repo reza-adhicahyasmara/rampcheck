@@ -43,7 +43,7 @@
     <table style="width: 100%;">
         <thead>
             <tr>
-                <td style="width: 33%;"><img style="width:100px;" src="<?= base_url('assets/img/logo-dinas.jpg') ?>" alt=""></td>
+                <td style="width: 33%;"><img style="width:100px;" src="<?= base_url('assets/img/logo-dishub-2.jpeg') ?>" alt=""></td>
                 <td style="width: 33%;">
                     <center>
                         <h3>Laporan BUS</h3>
